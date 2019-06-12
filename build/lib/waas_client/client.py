@@ -10,6 +10,8 @@ BOT_API = 'http://localhost:3010/api/'
 
 class WAAS(object):
     def __init__(self, api=BOT_API):
+        if not api.endswith('/'):
+            api = api + '/'
         self.api = api
         self.qrurl = None
         print(f'Running on api {api}')
@@ -71,4 +73,4 @@ class WAAS(object):
         print('logined')
         for msg in self.message():
             print(msg)
-            on_message(msg)
+            on_message(self, msg)

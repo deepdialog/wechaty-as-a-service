@@ -73,4 +73,4 @@ class WAAS(object):
         print('logined')
         for msg in self.message():
             print(msg)
-            on_message(msg)
+            on_message(self, msg)

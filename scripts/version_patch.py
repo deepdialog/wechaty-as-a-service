@@ -5,12 +5,12 @@
 
 def main():
     """Update version."""
-    version = open('deepdialog/version.txt', 'r').read().strip()
+    version = open('waas_client/version.txt', 'r').read().strip()
     a, b, c = [int(x) for x in version.split('.')]
     c += 1
     new_version = '{}.{}.{}'.format(a, b, c)
     print('shipped:', new_version)
-    with open('deepdialog/version.txt', 'w') as fp:
+    with open('waas_client/version.txt', 'w') as fp:
         fp.write(new_version)
 
 
