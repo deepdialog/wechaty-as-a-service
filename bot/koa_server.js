@@ -84,7 +84,7 @@ router
                 Math.max(botStatus.messages.length - 5, 0)
             ).filter(msg => {
                 const now = new Date()
-                if (now - msg.date > 60 * 1000) {
+                if (now - msg.date > 5 * 60 * 1000) {
                     return false
                 }
                 return true
