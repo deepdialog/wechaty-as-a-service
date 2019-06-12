@@ -2,3 +2,4 @@ node_modules
 *.memory-card.json
 dist
 *.egg-info
+*.pyc
