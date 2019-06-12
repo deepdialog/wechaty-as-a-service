@@ -30,3 +30,7 @@ registry.cn-beijing.aliyuncs.com/deepdialog/waas:latest
 ### Install Client
 
 `pip install waas-client`
+
+## DEMO
+
+Simplest echo bot: `echo.py`
