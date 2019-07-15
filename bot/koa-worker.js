@@ -123,7 +123,7 @@ router
         }
         return
     }
-    worker.postMessage({
+    parentPort.postMessage({
         event: 'message',
         data: ctx.request.body,
     })

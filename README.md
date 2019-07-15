@@ -27,6 +27,21 @@ docker run -d --restart=always --name=waas \
 registry.cn-beijing.aliyuncs.com/deepdialog/waas:latest
 ```
 
+Run for PadPro
+
+```
+docker pull registry.cn-beijing.aliyuncs.com/deepdialog/waas:latest && \
+docker run -d --restart=always --name=waas \
+-p 3010:3010 \
+-e WECHATY_PUPPET_PADPRO_TOKEN=THE_TOKEN \
+-v /etc/timezone:/etc/timezone:ro \
+-v /etc/localtime:/etc/localtime:ro \
+-v /var/wechaty-bot.memory-card.json:/bot/wechaty-bot.memory-card.json \
+registry.cn-beijing.aliyuncs.com/deepdialog/waas:latest
+```
+
+
+
 ### Install Client
 
 `pip install waas-client`
