@@ -3,7 +3,7 @@ const process = require('process')
 const Koa = require('koa')
 const Router = require('koa-trie-router')
 const bodyParser = require('koa-bodyparser')
-const { Worker } = require('worker_threads')
+const { parentPort } = require('worker_threads')
 const _ = require('lodash')
 
 
@@ -12,8 +12,8 @@ const botStatus = {
     login: null,
     messages: []
 }
-const worker = new Worker('./bot-worker.js')
-worker.on('message', message => {
+
+parentPort.on('message', message => {
     const {event, data} = message
     switch(event) {
         case 'scan':

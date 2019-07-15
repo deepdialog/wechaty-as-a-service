@@ -2,20 +2,48 @@
 const process = require('process')
 const { Wechaty } = require('wechaty')
 const { PuppetPadpro } = require('wechaty-puppet-padpro')
-const { parentPort } = require('worker_threads')
+// const { parentPort } = require('worker_threads')
+const { Worker } = require('worker_threads')
 
+const worker = new Worker('./koa-worker.js')
 let bot = null
 
+
+worker.on('message', async message => {
+    const {event, data} = message
+    if (event === 'message') {
+        const {topic, name, text} = data
+        if (!text) {
+            return
+        }
+        let contact = null
+        let room = null
+        if (name) {
+            contact = await bot.Contact.find({name})
+        }
+        if (topic) {
+            room = await bot.Room.find({topic})
+        }
+        if (room && contact && await room.has(contact)) {
+            room.say(`@${contact.name()} ${text}`)
+        } else if (room) {
+            room.say(text)
+        } else if (contact) {
+            contact.say(text)
+        }
+    }
+})
+
+
 if (process.env.WECHATY_PUPPET_PADPRO_TOKEN) {
-    console.log('Start with padpro')
+    console.log('Start with padpro', process.env.WECHATY_PUPPET_PADPRO_TOKEN)
     const puppet = new PuppetPadpro({token: process.env.WECHATY_PUPPET_PADPRO_TOKEN})
     bot = Wechaty.instance({puppet, profile: 'wechaty-bot'}) // Global Instance
+    console.log('started')
 } else {
     console.log('Start with normal')
     bot = Wechaty.instance({profile: 'wechaty-bot'}) // Global Instance
 }
-
-
 
 async function serializeMessage(message) {
     if (!message) {
@@ -59,44 +87,20 @@ async function serializeRoom(room) {
 }
 
 
-parentPort.on('message', async message => {
-    const {event, data} = message
-    if (event === 'message') {
-        const {topic, name, text} = data
-        if (!text) {
-            return
-        }
-        let contact = null
-        let room = null
-        if (name) {
-            contact = await bot.Contact.find({name})
-        }
-        if (topic) {
-            room = await bot.Room.find({topic})
-        }
-        if (room && contact && await room.has(contact)) {
-            room.say(`@${contact.name()} ${text}`)
-        } else if (room) {
-            room.say(text)
-        } else if (contact) {
-            contact.say(text)
-        }
-    }
-})
 
 
 bot
 .on('scan', (qrcode, status) => {
     qrurl = `https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(qrcode)}`
     console.log(`Scan QR Code to login: ${status}\n${qrurl}`)
-    parentPort.postMessage({
+    worker.postMessage({
         event: 'scan',
         data: qrurl
     })
 })
 .on('login', user => {
     console.log(`User ${user} logined`)
-    parentPort.postMessage({
+    worker.postMessage({
         event: 'login',
         data: user
     })
@@ -104,7 +108,7 @@ bot
 .on('logout', (user) => {
     // Logout Event will emit when bot detected log out.
     console.log(`user ${user} logout`)
-    parentPort.postMessage({
+    worker.postMessage({
         event: 'logout',
         data: user
     })
@@ -120,7 +124,7 @@ bot
         return
     }
     console.log(`Message: ${message}`)
-    parentPort.postMessage({
+    worker.postMessage({
         event: 'message',
         data: await serializeMessage(message)
     })
