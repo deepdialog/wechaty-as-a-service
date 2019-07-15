@@ -1,0 +1,39 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+BOT_API	../waas_client/client.py	/^BOT_API = 'http:\/\/localhost:3010\/api\/'$/;"	kind:variable	line:8
+INSTALL_REQUIRES	../setup.py	/^INSTALL_REQUIRES = [x.strip() for x in open(os.path.join($/;"	kind:variable	line:15
+VERSION	../setup.py	/^VERSION = os.path.join($/;"	kind:variable	line:20
+WAAS	../waas_client/client.py	/^class WAAS(object):$/;"	kind:class	line:11
+__all__	../waas_client/__init__.py	/^__all__ = ['WAAS']$/;"	kind:variable	line:5
+__init__	../waas_client/client.py	/^    def __init__(self, api=BOT_API):$/;"	kind:member	line:12
+__init__.py	../waas_client/__init__.py	1;"	kind:file	line:1
+author	../setup.py	/^    author='deepdialog',$/;"	kind:variable	line:34
+author_email	../setup.py	/^    author_email='thebotbot@sina.com',$/;"	kind:variable	line:35
+bot	../echo.py	/^    bot = WAAS('http:\/\/localhost:3010\/api\/')$/;"	kind:variable	line:14
+client.py	../waas_client/client.py	1;"	kind:file	line:1
+description	../setup.py	/^    description='WAAS Client',$/;"	kind:variable	line:30
+echo.py	../echo.py	1;"	kind:file	line:1
+include_package_data	../setup.py	/^    include_package_data=True,$/;"	kind:variable	line:37
+install_requires	../setup.py	/^    install_requires=INSTALL_REQUIRES$/;"	kind:variable	line:39
+keywords	../setup.py	/^    keywords=('Wechaty',),$/;"	kind:variable	line:29
+license	../setup.py	/^    license='Private',$/;"	kind:variable	line:32
+login	../waas_client/client.py	/^    def login(self):$/;"	kind:member	line:36
+long_description	../setup.py	/^    long_description='Wechaty-As-A-Service Client',$/;"	kind:variable	line:31
+main	../scripts/version_patch.py	/^def main():$/;"	kind:function	line:6
+message	../waas_client/client.py	/^    def message(self):$/;"	kind:member	line:45
+name	../setup.py	/^    name='waas-client',$/;"	kind:variable	line:27
+on_message	../echo.py	/^def on_message(bot, msg):$/;"	kind:function	line:5
+packages	../setup.py	/^    packages=find_packages(),$/;"	kind:variable	line:36
+platforms	../setup.py	/^    platforms='any',$/;"	kind:variable	line:38
+scan	../waas_client/client.py	/^    def scan(self):$/;"	kind:member	line:26
+send_message	../waas_client/client.py	/^    def send_message(self, text, name=None, topic=None):$/;"	kind:member	line:57
+setup.py	../setup.py	1;"	kind:file	line:1
+start	../waas_client/client.py	/^    def start(self, on_message):$/;"	kind:member	line:68
+status	../waas_client/client.py	/^    def status(self):$/;"	kind:member	line:19
+url	../setup.py	/^    url='https:\/\/github.com\/deepdialog\/wechaty-as-a-service',$/;"	kind:variable	line:33
+version	../setup.py	/^    version=open(VERSION, 'r').read().strip(),$/;"	kind:variable	line:28
+version_patch.py	../scripts/version_patch.py	1;"	kind:file	line:1

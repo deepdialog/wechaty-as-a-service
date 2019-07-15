@@ -1,9 +1,20 @@
 
 const process = require('process')
 const { Wechaty } = require('wechaty')
-const { parentPort } = require('worker_threads');
+const { PuppetPadpro } = require('wechaty-puppet-padpro')
+const { parentPort } = require('worker_threads')
 
-const bot = Wechaty.instance({profile: 'wechaty-bot'}) // Global Instance
+let bot = null
+
+if (process.env.WECHATY_PUPPET_PADPRO_TOKEN) {
+    console.log('Start with padpro')
+    const puppet = new PuppetPadpro({token: process.env.WECHATY_PUPPET_PADPRO_TOKEN})
+    bot = Wechaty.instance({puppet, profile: 'wechaty-bot'}) // Global Instance
+} else {
+    console.log('Start with normal')
+    bot = Wechaty.instance({profile: 'wechaty-bot'}) // Global Instance
+}
+
 
 
 async function serializeMessage(message) {
