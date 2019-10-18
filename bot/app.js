@@ -1,7 +1,8 @@
 
 const process = require('process')
 const { Wechaty } = require('wechaty')
-const { PuppetPadpro } = require('wechaty-puppet-padpro')
+// const { PuppetPadpro } = require('wechaty-puppet-padpro')
+const { PuppetPadplus } = require('wechaty-puppet-padplus')
 // const { parentPort } = require('worker_threads')
 const { Worker } = require('worker_threads')
 
@@ -35,9 +36,9 @@ worker.on('message', async message => {
 })
 
 
-if (process.env.WECHATY_PUPPET_PADPRO_TOKEN) {
-    console.log('Start with padpro', process.env.WECHATY_PUPPET_PADPRO_TOKEN)
-    const puppet = new PuppetPadpro({token: process.env.WECHATY_PUPPET_PADPRO_TOKEN})
+if (process.env.PUPPET_TOKEN) {
+    console.log('Start with puppet', process.env.PUPPET_TOKEN)
+    const puppet = new PuppetPadplus({token: process.env.PUPPET_TOKEN})
     bot = Wechaty.instance({puppet, profile: 'wechaty-bot'}) // Global Instance
     console.log('started')
 } else {
